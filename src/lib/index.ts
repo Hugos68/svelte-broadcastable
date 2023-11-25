@@ -1,21 +1,18 @@
 import { writable, type Updater, type StartStopNotifier } from 'svelte/store';
 
 export function broadcastable<T>(name: string, value?: T, start: StartStopNotifier<T> = () => {}) {
-	const channel = new BroadcastChannel(name);
+	let channel: BroadcastChannel | null = null;
 
 	const {
 		subscribe: _subscribe,
 		set: _set,
 		update: _update
 	} = writable<T>(value, (set, update) => {
-		function messageHandler({ data }: MessageEvent<T>) {
-			set(data);
-		}
-		channel.addEventListener('message', messageHandler);
+		channel = new BroadcastChannel(name);
+		channel.addEventListener('message', ({ data }) => set(data));
 		const stop = start(set, update);
 		return () => {
-			channel.removeEventListener('message', messageHandler);
-			channel.close();
+			channel?.close();
 			if (stop) stop();
 		};
 	});
@@ -23,13 +20,13 @@ export function broadcastable<T>(name: string, value?: T, start: StartStopNotifi
 	function update(updater: Updater<T>) {
 		_update((value) => {
 			const newValue = updater(value);
-			channel.postMessage(newValue);
+			channel?.postMessage(newValue);
 			return newValue;
 		});
 	}
 
 	function set(value: T) {
-		channel.postMessage(value);
+		channel?.postMessage(value);
 		_set(value);
 	}
 
