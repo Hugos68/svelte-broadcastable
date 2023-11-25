@@ -1,6 +1,6 @@
 # svelte-broadcastable
 
-Svelte broadcastable is a store wrapper for the [Broadcast API](https://developer.mozilla.org/en-US/docs/Web/API/Broadcast_Channel_API). It syncs any data across a given channel.
+Svelte broadcastable is a store wrapper for the [Broadcast Channel API](https://developer.mozilla.org/en-US/docs/Web/API/Broadcast_Channel_API). It syncs any data across a given channel.
 
 ## Usage
 
