@@ -1,6 +1,19 @@
 {
 	"name": "svelte-broadcastable",
 	"version": "0.0.1",
+	"license": "MIT",
+	"author": {
+		"name": "Hugo Korte",
+		"email": "hugokorteapple@gmail.com",
+		"url": "https://hugokorte.vercel.app/"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Hugos68/action-archive"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run package",
@@ -35,6 +48,7 @@
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/kit": "^1.27.4",
 		"@sveltejs/package": "^2.0.0",
+		"@changesets/cli": "^2.26.2",
 		"@typescript-eslint/eslint-plugin": "^6.0.0",
 		"@typescript-eslint/parser": "^6.0.0",
 		"eslint": "^8.28.0",
@@ -50,10 +64,8 @@
 		"vite": "^4.4.2",
 		"vitest": "^0.32.2"
 	},
+	"packageManager": "pnpm@8.8.0",
 	"svelte": "./dist/index.js",
 	"types": "./dist/index.d.ts",
-	"type": "module",
-	"dependencies": {
-		"@changesets/cli": "^2.26.2"
-	}
+	"type": "module"
 }
