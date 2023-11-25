@@ -8,11 +8,11 @@ export function broadcastable<T>(name: string, value?: T, start: StartStopNotifi
 		set: _set,
 		update: _update
 	} = writable<T>(value, (set, update) => {
-		const stop = start(set, update);
 		function messageHandler({ data }: MessageEvent<T>) {
 			set(data);
 		}
 		channel.addEventListener('message', messageHandler);
+		const stop = start(set, update);
 		return () => {
 			channel.removeEventListener('message', messageHandler);
 			channel.close();
